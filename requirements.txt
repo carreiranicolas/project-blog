@@ -1,0 +1,6 @@
+asgiref==3.11.1
+Django==6.0.6
+django-cors-headers==4.9.0 #Para utilizar o react
+djangorestframework==3.17.1 # DRF
+python-dotenv==1.2.2 #Para melhorar a manipulação de variaveis ambientes
+sqlparse==0.5.5
