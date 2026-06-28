@@ -37,7 +37,9 @@ class Post(models.Model):
         blank=False
     )
 
-    descricao = models.TextField()
+    descricao = models.TextField(max_length=250)
+
+    conteudo = models.TextField(default="")
 
     criado_em = models.DateTimeField(auto_now_add=True)
 

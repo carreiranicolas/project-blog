@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/6.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
-
+from datetime import timedelta
 from pathlib import Path
 from dotenv import load_dotenv
 import os
@@ -110,6 +110,34 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# Configuração global do Django Rest Framework
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+# Customização do tempo de expiração do Token (opcional, mas boa prática)
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),  # O usuário fica logado por 1 dia
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7), # Permite renovar o login por até 7 dias
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': False,
+}
+
+
+
+# Liberação para o desenvolvimento com REACT
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # Porta padrão do React (Vite/CRA)
+    "http://127.0.0.1:3000",
+    "http://localhost:5173",  # ⬅️ ADICIONE ESTA LINHA (Porta padrão do Vite)
+    "http://127.0.0.1:5173",  # ⬅️ ADICIONE ESTA LINHA TAMBÉM
+]
+
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
@@ -120,14 +148,6 @@ TIME_ZONE = 'America/Sao_Paulo'
 USE_I18N = True
 
 USE_TZ = True
-
-# Liberação para o desenvolvimento com REACT
-
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # Porta padrão do React (Vite/CRA)
-    "http://127.0.0.1:3000",
-]
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
